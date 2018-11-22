@@ -6,7 +6,7 @@ function initmap() {
 	// create the tile layer with correct attribution
 	var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 	var osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
-	var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 12, attribution: osmAttrib});
+	var osm = new L.TileLayer(osmUrl, {minZoom: 0, maxZoom: 18, attribution: osmAttrib});
 
 	// start the map in South-East England
 	//map.setView(new L.LatLng(51.3, 0.7),9);
@@ -69,16 +69,45 @@ for (var i = 0; i < trackSegs.length; i++) {
 }
 
 // get heartrade of given trkpt (only works with running because different extensions have different tags)
-console.log(trackPoints[0][0].getElementsByTagName('extensions')[0].getElementsByTagName('ns3:TrackPointExtension')[0].getElementsByTagName('ns3:hr')[0].innerHTML)
+console.log(trackPoints[0][0].getElementsByTagName('extensions')[0].getElementsByTagName('ns3:TrackPointExtension')[0].getElementsByTagName('ns3:hr')[0].innerHTML);
 
 // function trackPointInfo (trkpt) {
 // 	trkpt.getAttribute('lat')
 // }
 
-// put marker on every signle track point of the first tackseg
+var averageHeartRate = 0;
+var averageCad = 0;
+
 for (var i = 0; i < trackPoints[0].length; i++) {
+	averageHeartRate += Number(trackPoints[0][i].getElementsByTagName('extensions')[0].getElementsByTagName('ns3:TrackPointExtension')[0].getElementsByTagName('ns3:hr')[0].innerHTML);
+	averageCad += Number(trackPoints[0][i].getElementsByTagName('extensions')[0].getElementsByTagName('ns3:TrackPointExtension')[0].getElementsByTagName('ns3:cad')[0].innerHTML);
+}
+
+averageHeartRate = averageHeartRate / trackPoints[0].length;
+averageCad = averageCad / trackPoints[0].length;
+
+var startTime = new Date(trackPoints[0][0].getElementsByTagName('time')[0].innerHTML);
+var endTime = new Date(trackPoints[0][trackPoints[0].length-1].getElementsByTagName('time')[0].innerHTML);
+var totalMinutes = (endTime - startTime) / 60000
+
+var prevLat = Number(trackPoints[0][0].getAttribute('lat'));
+var prevLon = Number(trackPoints[0][0].getAttribute('lon'));
+
+L.marker([prevLat, prevLon], {title : 'Start'}).addTo(map);
+L.marker([Number(trackPoints[0][trackPoints[0].length-1].getAttribute('lat')), Number(trackPoints[0][trackPoints[0].length-1].getAttribute('lon'))], {title : 'End'}).addTo(map);
+
+for (var i = 1; i < trackPoints[0].length; i++) {
+
   var lat = Number(trackPoints[0][i].getAttribute('lat'));
   var lon = Number(trackPoints[0][i].getAttribute('lon'));
 
-  L.marker([lat, lon]).addTo(map);
+	L.polyline([[prevLat, prevLon], [lat, lon]], {color : 'red'}).addTo(map);
+
+	prevLat=lat;
+	prevLon=lon;
+
 }
+
+var metadata = document.getElementById('metadata');
+
+metadata.innerHTML = 'Track Name: ' + trackName + ', Total time: ' + totalMinutes + ' minutes, ' + 'Average heart rate: ' + averageHeartRate + ' bpm, ' + 'Average cadence: ' + averageCad + ' absolute cadence units';
