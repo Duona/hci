@@ -77,10 +77,14 @@ console.log(trackPoints[0][0].getElementsByTagName('extensions')[0].getElementsB
 
 var averageHeartRate = 0;
 var averageCad = 0;
+var elevations = new Array();
+var times = new Array();
 
 for (var i = 0; i < trackPoints[0].length; i++) {
 	averageHeartRate += Number(trackPoints[0][i].getElementsByTagName('extensions')[0].getElementsByTagName('ns3:TrackPointExtension')[0].getElementsByTagName('ns3:hr')[0].innerHTML);
 	averageCad += Number(trackPoints[0][i].getElementsByTagName('extensions')[0].getElementsByTagName('ns3:TrackPointExtension')[0].getElementsByTagName('ns3:cad')[0].innerHTML);
+	elevations.push(Number(trackPoints[0][i].getElementsByTagName('ele')[0].innerHTML));
+	times.push(Date(trackPoints[0][i].getElementsByTagName('time')[0].innerHTML));
 }
 
 averageHeartRate = averageHeartRate / trackPoints[0].length;
@@ -137,3 +141,25 @@ for (var i = 1; i < trackPoints[0].length; i++) {
 var metadata = document.getElementById('metadata');
 
 metadata.innerHTML = 'Track Name: ' + trackName + ', Total time: ' + totalMinutes + ' minutes, ' + 'Total distance: ' + distance + ' kilometers, ' + 'Average speed: ' + distance/(totalMinutes/60) + ' km/h, ' + 'Average heart rate: ' + averageHeartRate + ' bpm, ' + 'Average cadence: ' + averageCad + ' absolute cadence units';
+
+
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: times,
+        datasets: [{
+            label: "Elevation graph",
+            backgroundColor: 'rgb(167, 232, 29)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: elevations,
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
