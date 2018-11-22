@@ -92,14 +92,40 @@ var totalMinutes = (endTime - startTime) / 60000
 
 var prevLat = Number(trackPoints[0][0].getAttribute('lat'));
 var prevLon = Number(trackPoints[0][0].getAttribute('lon'));
+var distance = 0;
 
 L.marker([prevLat, prevLon], {title : 'Start'}).addTo(map);
 L.marker([Number(trackPoints[0][trackPoints[0].length-1].getAttribute('lat')), Number(trackPoints[0][trackPoints[0].length-1].getAttribute('lon'))], {title : 'End'}).addTo(map);
+
+// source: https://www.geodatasource.com/developers/javascript
+function geoDistance(lat1, lon1, lat2, lon2, unit) {
+	if ((lat1 == lat2) && (lon1 == lon2)) {
+		return 0;
+	}
+	else {
+		var radlat1 = Math.PI * lat1/180;
+		var radlat2 = Math.PI * lat2/180;
+		var theta = lon1-lon2;
+		var radtheta = Math.PI * theta/180;
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+		if (dist > 1) {
+			dist = 1;
+		}
+		dist = Math.acos(dist);
+		dist = dist * 180/Math.PI;
+		dist = dist * 60 * 1.1515;
+		if (unit=="K") { dist = dist * 1.609344 }
+		if (unit=="N") { dist = dist * 0.8684 }
+		return dist;
+	}
+}
 
 for (var i = 1; i < trackPoints[0].length; i++) {
 
   var lat = Number(trackPoints[0][i].getAttribute('lat'));
   var lon = Number(trackPoints[0][i].getAttribute('lon'));
+
+	distance += geoDistance(prevLat, prevLon, lat, lon, 'K');
 
 	L.polyline([[prevLat, prevLon], [lat, lon]], {color : 'red'}).addTo(map);
 
@@ -110,4 +136,4 @@ for (var i = 1; i < trackPoints[0].length; i++) {
 
 var metadata = document.getElementById('metadata');
 
-metadata.innerHTML = 'Track Name: ' + trackName + ', Total time: ' + totalMinutes + ' minutes, ' + 'Average heart rate: ' + averageHeartRate + ' bpm, ' + 'Average cadence: ' + averageCad + ' absolute cadence units';
+metadata.innerHTML = 'Track Name: ' + trackName + ', Total time: ' + totalMinutes + ' minutes, ' + 'Total distance: ' + distance + ' kilometers, ' + 'Average speed: ' + distance/(totalMinutes/60) + ' km/h, ' + 'Average heart rate: ' + averageHeartRate + ' bpm, ' + 'Average cadence: ' + averageCad + ' absolute cadence units';
