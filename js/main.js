@@ -26,7 +26,7 @@ var circle = L.circle([51.508, -0.11], {
 
 function readTextFile(file) {
     var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
+    rawFile.open('GET', file, false);
     rawFile.send(null);
     return rawFile.responseText;
     // rawFile.onreadystatechange = function () {
@@ -39,21 +39,46 @@ function readTextFile(file) {
     // }
 }
 
+
+
 //alert(readTextFile('data/running.gpx').substring(20000, 21000));
 
+// create gpx parser
 var xmlFile = readTextFile('data/running.gpx');
-//console.log(xmlFile.substring(20000, 21000));
-
+// var xmlFile = readTextFile('data/cycling.gpx');
 var parser = new DOMParser();
+var xmlDoc = parser.parseFromString(xmlFile,'text/xml');
 
-var xmlDoc = parser.parseFromString(xmlFile,"text/xml");
-// alert(xmlDoc.getElementsByTagName("trkpt").length);
-// alert(xmlDoc.getElementsByTagName("trkpt")[0].getAttribute('lat'));
-//document.getElementById('stupid').innerHTML = xmlDoc.getElementsByTagName("gpx")[0].childNodes[0].nodeValue;
-var trackPoints  = xmlDoc.getElementsByTagName("trkpt");
-for (var i = 0; i < trackPoints.length; i++) {
-  var lat = Number(trackPoints[i].getAttribute('lat'));
-  var lon = Number(trackPoints[i].getAttribute('lon'));
+try {
+	console.log(xmlDoc.getElementsByTagName('gpx')[0]);
+}
+catch(err) {
+	console.log(err);
+}
+
+var trackName = xmlDoc.getElementsByTagName('trk')[0].getElementsByTagName('name')[0].innerHTML;
+console.log(trackName);
+
+var trackSegs = xmlDoc.getElementsByTagName('trkseg');
+
+// 2d array. First indice is track seg, second is track point
+var trackPoints = new Array();
+
+for (var i = 0; i < trackSegs.length; i++) {
+	trackPoints.push(trackSegs[i].getElementsByTagName('trkpt'));
+}
+
+// get heartrade of given trkpt (only works with running because different extensions have different tags)
+console.log(trackPoints[0][0].getElementsByTagName('extensions')[0].getElementsByTagName('ns3:TrackPointExtension')[0].getElementsByTagName('ns3:hr')[0].innerHTML)
+
+// function trackPointInfo (trkpt) {
+// 	trkpt.getAttribute('lat')
+// }
+
+// put marker on every signle track point of the first tackseg
+for (var i = 0; i < trackPoints[0].length; i++) {
+  var lat = Number(trackPoints[0][i].getAttribute('lat'));
+  var lon = Number(trackPoints[0][i].getAttribute('lon'));
 
   L.marker([lat, lon]).addTo(map);
 }
