@@ -1,7 +1,6 @@
 #mapid {
-  margin-left: 50%;
-  height: 720px;
-  width: 720px;
+  height: 90%;
+  width: 100%;
 }
 
 /* Dropdown Button */
@@ -48,3 +47,8 @@
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
+
+/* sets row hight percetage */
+body, html, .container-fluid {
+     height: 100%;
+}
