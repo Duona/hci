@@ -25,37 +25,30 @@
         <button onclick="userRouteUpload()">Upload Route</button>
         <input type="file" id="userRouteUpload" >
       </form>
-  </nav>
-  <div class="container-fluid">
-    <div class="row" style="height: 80%">
-      <div class="col-sm-2">
+    </nav>
+      <div class="row" style="height: 60%">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8">
+          <div id="mapid">
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div id="trackName">
+          </div>
+          <div id="totalTime">
+          </div>
+          <div id="totalDistance">
+          </div>
+          <div id="averageSpeed">
+          </div>
+          <div id="averageHR">
+          </div>
+          <div id="cadence">
+          </div>
+        </div>
       </div>
 
-      <div class="col-sm-8">
-        <div id="mapid">
-        </div>
-      </div>
-      <div class="col-sm-2">
-        <div id="trackName">
-        </div>
-        <div id="totalTime">
-        </div>
-        <div id="totalDistance">
-        </div>
-        <div id="averageSpeed">
-        </div>
-        <div id="averageHR">
-        </div>
-        <div id="cadence">
-
-<<<<<<< HEAD
-=======
-          </div
->>>>>>> 14334563b33a21a7055b3b702f6d7a1f4ae65393
-        </div>
-        <p style="font-style: italic; text-align:center"> absolute cadence units </p>
-      </div>
-    </div>
     <div class="col-sm-12">
       <div class="row" id="graph">
         <canvas id="myChart" height="100" width="500"></canvas>
@@ -70,31 +63,31 @@
   <script src="js/graph.js" charset="utf-8"></script>
 
   <script type="text/javascript">
-    /* When the user clicks on the button,
-      toggle between hiding and showing the dropdown content */
+  /* When the user clicks on the button,
+  toggle between hiding and showing the dropdown content */
 
-    function dropDown() {
-      document.getElementById("myDropdown").classList.toggle("show");
-    }
+  function dropDown() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
 
-    // Close the dropdown menu if the user clicks outside of it
-    window.onclick = function(event) {
-      if (!event.target.matches('.dropbtn')) {
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
 
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-          }
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
         }
       }
     }
+  }
 
-    function userRouteUpload() {
-      var userRoute = document.getElementById("userRouteUpload");
-    }
+  function userRouteUpload() {
+    var userRoute = document.getElementById("userRouteUpload");
+  }
   </script>
 
 

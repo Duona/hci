@@ -20,6 +20,20 @@ var chart = new Chart(ctx, {
 
     // Configuration options go here
     options: {
+      scales: {
+       xAxes: [{
+         ticks: {
+                    // Include a dollar sign in the ticks
+                    callback: function(value, index, values) {
+                        return;
+                    }},
+           gridLines: {
+               color: "rgba(0, 0, 0, 0)",
+           }
+       }],
+
+
+     },
       tooltips: {
                callbacks: {
                    title: function() {
