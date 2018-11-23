@@ -23,8 +23,8 @@
     <div class="container-fluid">
       <div class="row" style="height: 80%">
         <div class="col-sm-2">
-          <p>This is where metadata is supposed to be</p>
-
+          <p>Upload route to track on map</p>
+          <input type="file" id="userRouteUpload">
           <p></p>
           <p></p>
           <img src="LegItLogo.png" width=69% height=35%></img>
@@ -83,6 +83,11 @@
           }
         }
       }
+
+      function userRouteUpload() {
+    var userRoute = document.getElementById("userRouteUpload");
+    userRoute.disabled = true;
+}
     </script>
 
 
