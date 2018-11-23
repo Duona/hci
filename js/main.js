@@ -141,9 +141,10 @@ document.getElementById('averageSpeed').innerHTML = 'Average speed: ' + parseFlo
 document.getElementById('averageHR').innerHTML = 'Average heart rate: ' + parseFloat(averageHeartRate).toFixed(2) + 'bpm';
 document.getElementById('cadence').innerHTML = 'Average cadence: ' +  parseFloat(averageCad).toFixed(2) + ' ACU';
 
-// proof that js was created by stds for stds: https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-a-range-within-the-supp
-var valArray = [...Array(elevations.length).keys()];
 
+
+// proof that js was created by sdts for sdts: https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-a-range-within-the-supp
+var valArray = [...Array(elevations.length).keys()];
 
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
