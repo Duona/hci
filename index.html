@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
     <div class="container-fluid">
       <div class="dropdown">
         <button onclick="dropDown()" class="dropbtn">Dropdown</button>
@@ -22,11 +22,10 @@
         </div>
       </div>
       <form class="form-inline my-2 my-lg-0">
-        <button onclick="userRouteUpload()">Upload Route</button>
-        <input type="file" id="userRouteUpload" >
+        <button onclick="userRouteUpload()" class="btn my-2 my-sm-0" type="submit">Upload Route</button>
+        <input type="file" id="userRouteUpload">
       </form>
   </nav>
-  <div class="container-fluid">
     <div class="row" style="height: 80%">
       <div class="col-sm-2">
       </div>
@@ -47,20 +46,14 @@
         <div id="averageHR">
         </div>
         <div id="cadence">
-
-<<<<<<< HEAD
-=======
-          </div
->>>>>>> 14334563b33a21a7055b3b702f6d7a1f4ae65393
         </div>
-        <p style="font-style: italic; text-align:center"> absolute cadence units </p>
       </div>
     </div>
-    <div class="col-sm-12">
-      <div class="row" id="graph">
-        <canvas id="myChart" height="100" width="500"></canvas>
-      </div>
+  <div class="col-sm-12">
+    <div class="row" id="graph">
+      <canvas id="myChart" height="100" width="500"></canvas>
     </div>
+  </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   <script src="js/jquery-3.3.1.js" charset="utf-8"></script>
