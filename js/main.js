@@ -168,11 +168,25 @@ for (trackSeg; trackSeg < trackSegs.length; trackSeg++) {
 
 		distance += geoDistance(prevLat, prevLon, lat, lon, 'K');
 
-		L.polyline([[prevLat, prevLon], [lat, lon]], {color : 'red'}).addTo(map);
+		L.polyline([[prevLat, prevLon], [lat, lon]], {color : 'rgba(91, 208, 114, 0.5)'}).addTo(map);
 
 		prevLat=lat;
 		prevLon=lon;
 
+	}
+
+	var prevEl = elevations[0];
+	var totalAscend = 0;
+	var totalDescend = 0;
+	// total ascend and descend
+	for (var i = 1; i < elevations.length; i++) {
+		var diff = elevations[i] - prevEl;
+		if(diff > 0) {
+			totalAscend += diff;
+		} else {
+			totalDescend += diff;
+		}
+		prevEl = elevations[i];
 	}
 
 	var metadata = document.getElementById('metadata');
@@ -182,7 +196,7 @@ for (trackSeg; trackSeg < trackSegs.length; trackSeg++) {
 	document.getElementById('averageSpeed').innerHTML = 'Average speed: ' + parseFloat(distance/(totalTime / 1000 / 60 / 60)).toFixed(2) + ' km/h';
 
 
-	document.getElementById('averageHR').innerHTML = 'Average heart rate: ' + parseFloat(averages.get('hr')).toFixed(2) + 'bpm';
-	document.getElementById('cadence').innerHTML = 'Average cadence: ' +  parseFloat(averages.get('cad')).toFixed(2) + ' ACU';
+	document.getElementById('averageHR').innerHTML = 'Total ascend: ' + parseFloat(totalAscend).toFixed(2) + ' m';//'Average heart rate: ' + parseFloat(averages.get('hr')).toFixed(2) + 'bpm';
+	document.getElementById('cadence').innerHTML = 'Total descend: ' + parseFloat(totalDescend).toFixed(2) + ' m';//'Average cadence: ' +  parseFloat(averages.get('cad')).toFixed(2) + ' ACU';
 
 }
