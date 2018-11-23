@@ -60,8 +60,8 @@ function readTextFile(file) {
 //alert(readTextFile('data/running.gpx').substring(20000, 21000));
 
 // create gpx parser
-// var xmlFile = readTextFile('data/running.gpx');
-var xmlFile = readTextFile('data/cycling.gpx');
+var xmlFile = readTextFile('data/running.gpx');
+// var xmlFile = readTextFile('data/cycling.gpx');
 var parser = new DOMParser();
 var xmlDoc = parser.parseFromString(xmlFile,'text/xml');
 
