@@ -92,7 +92,9 @@ averageCad = averageCad / trackPoints[0].length;
 
 var startTime = new Date(trackPoints[0][0].getElementsByTagName('time')[0].innerHTML);
 var endTime = new Date(trackPoints[0][trackPoints[0].length-1].getElementsByTagName('time')[0].innerHTML);
-var totalMinutes = (endTime - startTime) / 60000
+var totalMinutes = (endTime - startTime) / 60000;
+var totalTime = endTime - startTime;
+
 
 var prevLat = Number(trackPoints[0][0].getAttribute('lat'));
 var prevLon = Number(trackPoints[0][0].getAttribute('lon'));
@@ -140,12 +142,14 @@ for (var i = 1; i < trackPoints[0].length; i++) {
 
 var metadata = document.getElementById('metadata');
 document.getElementById('trackName').innerHTML = 'Track name: ' +  trackName;
-document.getElementById('totalTime').innerHTML = 'Total time: ' +  parseFloat(totalMinutes).toFixed(2) + ' minutes';
+document.getElementById('totalTime').innerHTML = 'Total time: ' + Math.floor(totalTime / 1000 / 60 / 60) + 'h ' +  Math.floor(totalTime / 1000 / 60)  + 'min ' + Math.floor(totalTime / 1000 / 60 / 60) + 's';
 document.getElementById('totalDistance').innerHTML = 'Total distance: ' +  parseFloat(distance).toFixed(2) + ' km';
 document.getElementById('averageSpeed').innerHTML = 'Average speed: ' + parseFloat(distance/(totalMinutes/60)).toFixed(2) + ' km/h';
 document.getElementById('averageHR').innerHTML = 'Average heart rate: ' + parseFloat(averageHeartRate).toFixed(2) + ' bpm';
 document.getElementById('cadence').innerHTML = 'Average cadence: ' +  parseFloat(averageCad).toFixed(2) + ' ACU';
 
+// proof that js was created by stds for stds: https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-a-range-within-the-supp
+var valArray = [...Array(elevations.length).keys()];
 
 
 var ctx = document.getElementById('myChart').getContext('2d');
@@ -155,7 +159,7 @@ var chart = new Chart(ctx, {
 
     // The data for our dataset
     data: {
-        labels: times,
+        labels: valArray,
         datasets: [{
             label: "Elevation graph",
             backgroundColor: 'rgb(167, 232, 29)',
