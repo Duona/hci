@@ -7,12 +7,11 @@ var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'line',
-
     // The data for our dataset
     data: {
         labels: valArray,
         datasets: [{
-            label: "Elevation graph",
+            label: "Height, m",
             backgroundColor: 'rgb(167, 232, 29)',
             borderColor: 'rgb(255, 99, 132)',
             data: elevations,
@@ -20,5 +19,36 @@ var chart = new Chart(ctx, {
     },
 
     // Configuration options go here
-    options: {}
+    options: {
+      scales: {
+       xAxes: [{
+         ticks: {
+                    // Include a dollar sign in the ticks
+                    callback: function(value, index, values) {
+                        return;
+                    }},
+           gridLines: {
+               color: "rgba(0, 0, 0, 0)",
+           }
+       }],
+
+
+     },
+      tooltips: {
+               callbacks: {
+                   title: function() {
+                           return '';
+                   },
+                   label: function(item, data) {
+                   var datasetLabel=data.datasets[item.datasetIndex].label||'';
+                   var dataPoint = item.yLabel;
+                   return datasetLabel + ': '+ parseFloat(dataPoint).toFixed(1);
+                   }
+               }
+           }
+         }
+
+
+
+
 });
