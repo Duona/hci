@@ -4,7 +4,7 @@
 }
 
 #mapid {
-  height: 90%;
+  height: 100%;
   width: 100%;
 }
 
@@ -19,7 +19,7 @@
   border-radius: 10px;
   background-color: #4CB5F5;
   border-color: #4CB5F5;
-  color: #116400;
+  color: #FFFFFF;
 }
 
 /* Dropdown Button */

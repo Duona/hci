@@ -19,5 +19,22 @@ var chart = new Chart(ctx, {
     },
 
     // Configuration options go here
-    options: {}
+    options: {
+      tooltips: {
+               callbacks: {
+                   title: function() {
+                           return '';
+                   },
+                   label: function(item, data) {
+                   var datasetLabel=data.datasets[item.datasetIndex].label||'';
+                   var dataPoint = item.yLabel;
+                   return datasetLabel + ': '+ parseFloat(dataPoint).toFixed(1);
+                   }
+               }
+           }
+         }
+
+
+
+
 });
