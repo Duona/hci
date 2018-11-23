@@ -143,7 +143,7 @@ document.getElementById('trackName').innerHTML = 'Track name: ' +  trackName;
 document.getElementById('totalTime').innerHTML = 'Total time: ' +  parseFloat(totalMinutes).toFixed(2) + ' minutes';
 document.getElementById('totalDistance').innerHTML = 'Total distance: ' +  parseFloat(distance).toFixed(2) + ' km';
 document.getElementById('averageSpeed').innerHTML = 'Average speed: ' + parseFloat(distance/(totalMinutes/60)).toFixed(2) + ' km/h';
-document.getElementById('averageHR').innerHTML = 'Average heart rate: ' + parseFloat(averageHeartRate).toFixed(2) + ' bpm';
+document.getElementById('averageHR').innerHTML = 'Average heart rate: ' + parseFloat(averageHeartRate).toFixed(2) + 'bpm';
 document.getElementById('cadence').innerHTML = 'Average cadence: ' +  parseFloat(averageCad).toFixed(2) + ' ACU';
 
 
