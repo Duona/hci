@@ -139,8 +139,12 @@ for (var i = 1; i < trackPoints[0].length; i++) {
 }
 
 var metadata = document.getElementById('metadata');
-
-metadata.innerHTML = 'Track Name: ' + trackName + ', Total time: ' + totalMinutes + ' minutes, ' + 'Total distance: ' + distance + ' kilometers, ' + 'Average speed: ' + distance/(totalMinutes/60) + ' km/h, ' + 'Average heart rate: ' + averageHeartRate + ' bpm, ' + 'Average cadence: ' + averageCad + ' absolute cadence units';
+document.getElementById('trackName').innerHTML = 'Track name: ' +  trackName;
+document.getElementById('totalTime').innerHTML = 'Total time: ' +  parseFloat(totalMinutes).toFixed(2) + ' minutes';
+document.getElementById('totalDistance').innerHTML = 'Total distance: ' +  parseFloat(distance).toFixed(2) + ' km';
+document.getElementById('averageSpeed').innerHTML = 'Average speed: ' + parseFloat(distance/(totalMinutes/60)).toFixed(2) + ' km/h';
+document.getElementById('averageHR').innerHTML = 'Average heart rate: ' + parseFloat(averageHeartRate).toFixed(2) + ' bpm';
+document.getElementById('cadence').innerHTML = 'Average cadence: ' +  parseFloat(averageCad).toFixed(2) + ' ACU';
 
 
 
