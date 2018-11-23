@@ -1,3 +1,4 @@
+// proof that js was created by sdts for sdts: https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-a-range-within-the-supp
 var valArray = [...Array(elevations.length).keys()];
 
 console.log(elevations.length);
