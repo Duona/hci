@@ -145,7 +145,7 @@ document.getElementById('trackName').innerHTML = 'Track name: ' +  trackName;
 document.getElementById('totalTime').innerHTML = 'Total time: ' + Math.floor(totalTime / 1000 / 60 / 60) + 'h ' +  Math.floor(totalTime / 1000 / 60)  + 'min ' + Math.floor(totalTime / 1000 / 60 / 60) + 's';
 document.getElementById('totalDistance').innerHTML = 'Total distance: ' +  parseFloat(distance).toFixed(2) + ' km';
 document.getElementById('averageSpeed').innerHTML = 'Average speed: ' + parseFloat(distance/(totalMinutes/60)).toFixed(2) + ' km/h';
-document.getElementById('averageHR').innerHTML = 'Average heart rate: ' + parseFloat(averageHeartRate).toFixed(2) + ' bpm';
+document.getElementById('averageHR').innerHTML = 'Average heart rate: ' + parseFloat(averageHeartRate).toFixed(2) + 'bpm';
 document.getElementById('cadence').innerHTML = 'Average cadence: ' +  parseFloat(averageCad).toFixed(2) + ' ACU';
 
 // proof that js was created by stds for stds: https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-a-range-within-the-supp
