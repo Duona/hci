@@ -61,12 +61,8 @@ for (var i = 0; i < trackSegs.length; i++) {
 	trackPoints.push(trackSegs[i].getElementsByTagName('trkpt'));
 }
 
-// get heartrade of given trkpt (only works with running because different extensions have different tags)
+// get heartrate of given trkpt (only works with running because different extensions have different tags)
 console.log(trackPoints[0][0].getElementsByTagName('extensions')[0].getElementsByTagName('ns3:TrackPointExtension')[0].getElementsByTagName('ns3:hr')[0].innerHTML);
-
-// function trackPointInfo (trkpt) {
-// 	trkpt.getAttribute('lat')
-// }
 
 var averageHeartRate = 0;
 var averageCad = 0;
@@ -142,9 +138,10 @@ document.getElementById('averageHR').innerHTML = 'Average heart rate: ' + parseF
 document.getElementById('cadence').innerHTML = 'Average cadence: ' +  parseFloat(averageCad).toFixed(2) + ' ACU';
 
 
-
 // proof that js was created by sdts for sdts: https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-a-range-within-the-supp
 var valArray = [...Array(elevations.length).keys()];
+
+console.log(elevations.length);
 
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
