@@ -85,20 +85,21 @@ function dropDown() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
 
-var selectedRoute = 0;
+var re = /\d$/;
+var selectedRoute = re.exec(document.URL)[0];
 
-console.log(routes.length);
+console.log(selectedRoute);
 
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
     var dropdowns = document.getElementsByClassName('dropdown-content');
-		var myDropdown = document.getElementById('myDropdown');
+		// var myDropdown = document.getElementById('myDropdown');
     for (var i = 0; i < routes.length; i++) {
 
-			var list = document.createElement('button');
-			list.innerHTML = 'Route ' + i;
-			myDropdown.appendChild(list);
+			// var list = document.createElement('button');
+			// list.innerHTML = 'Route ' + i;
+			// myDropdown.appendChild(list);
 
       var openDropdown = dropdowns[i];
       if (openDropdown.classList.contains('show')) {
@@ -111,7 +112,7 @@ window.onclick = function(event) {
 
 // create gpx parser
 
-var xmlFile = readTextFile(routes[5]);
+var xmlFile = readTextFile(routes[selectedRoute]);
 var parser = new DOMParser();
 var xmlDoc = parser.parseFromString(xmlFile,'text/xml');
 
@@ -136,8 +137,8 @@ for (var i = 0; i < trackSegs.length; i++) {
 
 var extensionNames = new Array();
 var extensionValues = new Array();
-var extensionDic = {'hr' : 'heartrate', 'cad' : 'cadence', 'atemp' : 'atempt I guess'};
-var extensionUnitDic = {'hr' : 'bpm', 'cad' : 'ACU', 'atemp' : 'how hard you tried'};
+var extensionDic = {'hr' : 'heartrate', 'cad' : 'cadence', 'atemp' : 'atempt'};
+var extensionUnitDic = {'hr' : 'bpm', 'cad' : 'ACU', 'atemp' : 'tries'};
 var firstIterration = false;
 
 for (trackSeg; trackSeg < trackSegs.length; trackSeg++) {
