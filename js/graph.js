@@ -1,8 +1,6 @@
 // proof that js was created by sdts for sdts: https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-a-range-within-the-supp
 var valArray = [...Array(elevations.length).keys()];
 
-console.log(elevations.length);
-
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
     // The type of chart we want to create
